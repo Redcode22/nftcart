@@ -2,9 +2,7 @@ import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Button, chakra, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import { isValidMotionProp, motion } from 'framer-motion'
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Navbar from '../components/navbar'
-import styles from '../styles/Home.module.css'
 
 const HomeLogoBox = chakra(motion.div, {
   shouldForwardProp: (prop) => isValidMotionProp(prop) || prop === 'children',
@@ -21,13 +19,15 @@ const Home: NextPage = () => {
     >
       <Navbar />
       <Flex
+        flexDir={{ base: 'column', md: 'row' }}
         w={['100%', '100%', '100%', '100%', '100%']}
-        justify={'space-around'}
+        justify={{ base: 'center', md: 'space-around' }}
         align={'center'}
         p={4}
         height={'100%'}
       >
         <HomeLogoBox
+          mb={{ base: '20', md: 0 }}
           animate={{
             rotate: [0, 360, 0]
           }}
@@ -38,16 +38,18 @@ const Home: NextPage = () => {
             repeatType: "loop"
           }}
         >
-          <Image src='/logo.png' alt='logo' height={'400px'} />
+          <Image src='/logo.png' alt='logo' height={{ base: '200px', md: '400px' }} />
         </HomeLogoBox>
-        <VStack>
-          <Heading size={'3xl'}>
+        <VStack
+        w={{ base: '100%', md: '50%' }}
+        >
+          <Heading size={{ base: '2xl', md: '3xl' }}>
             Welcome to{" "}
             <NftText
               // as='span'
               color={'#FA00FE'}
               animate={{
-                color: ["#0051FE" , "#F000FF", "#0051FE"]
+                color: ["#0051FE", "#F000FF", "#0051FE"]
               }}
               transition={{
                 duration: 3,
@@ -57,10 +59,14 @@ const Home: NextPage = () => {
               }}
             >NFTing</NftText>
           </Heading>
-          <Text fontSize={24} w={'400px'} textAlign={'center'}>
+          <Text
+            w={{ base: '100%', md: '50%' }}
+            textAlign={'center'}
+            fontSize={{ base: '18px', md: '24px' }}
+          >
             Revolutionizing the NFTs with the Polygon Blockchain.Bringing the power of Blockchain with ECommerce
           </Text>
-          <Button size={'lg'}>
+          <Button size={'lg'} mt={40}>
             <ArrowForwardIcon mr={2} />
             Get Started
           </Button>

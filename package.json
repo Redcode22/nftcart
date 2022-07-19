@@ -1,0 +1,34 @@
+{
+  "name": "nftcart",
+  "packageManager": "yarn@3.2.0",
+  "version": "0.1.0",
+  "description": "The application to support warranty based on NFTs",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "concurrently --kill-others-on-fail \"yarn contracts\"  \"yarn web\"",
+    "web": "yarn workspace web dev",
+    "web:build": "yarn workspace web build",
+    "web:start": "yarn workspace web start",
+    "web:lint": "yarn workspace web lint",
+    "web:test": "yarn workspace web test",
+    "web:test:ci": "yarn workspace web test:ci",
+    "web:cypress": "yarn workspace web cypress",
+    "contracts": "yarn workspace contracts dev",
+    "contracts:compile": "yarn workspace contracts compile",
+    "contracts:void:deploy": "yarn workspace contracts void:deploy",
+    "contracts:test": "yarn workspace contracts test",
+    "contracts:test:ci": "yarn workspace contracts test:ci"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.3.0"
+  },
+  "devDependencies": {
+    "husky": "^8.0.1"
+  }
+}

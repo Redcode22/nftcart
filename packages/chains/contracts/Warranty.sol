@@ -54,7 +54,7 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return ownerOf(tokenId);
     }
 
-    function isUnderWarranty(unint256 tokenId) public view returns(boolean) {
+    function isUnderWarranty(uint256 tokenId) public view returns(bool) {
         return block.timestamp > warrantyValidity;
     }
 

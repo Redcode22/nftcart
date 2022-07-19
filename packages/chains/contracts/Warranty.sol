@@ -11,8 +11,12 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
+    string public productName;
+    uint256 public warrantyValidity;
 
-    constructor() ERC721("Warranty", "RDC") {}
+    constructor() ERC721("Warranty", "RDC") {
+        warrantyValidity = (block.timestamp + 365 days);
+    }
 
     function safeMint(address to, string memory uri) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
@@ -50,7 +54,12 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return ownerOf(tokenId);
     }
 
+    function isUnderWarranty(unint256 tokenId) public view returns(boolean) {
+        return block.timestamp > warrantyValidity;
+    }
+
     function decayWarranty(uint256 tokenId) public onlyOwner {
+        require(block.timestamp > warrantyValidity);
         _burn(tokenId);
     }
 }

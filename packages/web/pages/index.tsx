@@ -41,7 +41,7 @@ const Home: NextPage = () => {
           <Image src='/logo.png' alt='logo' height={{ base: '200px', md: '400px' }} />
         </HomeLogoBox>
         <VStack
-        w={{ base: '100%', md: '50%' }}
+          w={{ base: '100%', md: '50%' }}
         >
           <Heading size={{ base: '2xl', md: '3xl' }}>
             Welcome to{" "}
@@ -57,14 +57,14 @@ const Home: NextPage = () => {
                 repeat: Infinity,
                 repeatType: "loop"
               }}
-            >NFTing</NftText>
+            >NFTkart</NftText>
           </Heading>
           <Text
             w={{ base: '100%', md: '50%' }}
             textAlign={'center'}
             fontSize={{ base: '18px', md: '24px' }}
           >
-            Revolutionizing the NFTs with the Polygon Blockchain.Bringing the power of Blockchain with ECommerce
+            Revolutionizing the warranties of the products with NFTs and the blockchain. Preserving the authenticity.
           </Text>
           <Button size={'lg'} mt={40}>
             <ArrowForwardIcon mr={2} />

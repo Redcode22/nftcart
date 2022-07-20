@@ -26,8 +26,8 @@ const Navbar = () => {
             </>
           ) : <LoginMetamask />
         } */}
-        {/* <LogoutMetamask />
-        <LoginMetamask /> */}
+        <LogoutMetamask />
+        <LoginMetamask />
         <DarkModeSwitch />
       </Flex>
     </Flex>

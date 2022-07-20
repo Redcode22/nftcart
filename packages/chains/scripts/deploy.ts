@@ -7,12 +7,16 @@ async function main() {
 
   const lockedAmount = ethers.utils.parseEther("1");
 
-  const Lock = await ethers.getContractFactory("Warranty");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  const Ownership = await ethers.getContractFactory("Ownership");
+  const ownership = await Ownership.deploy();
 
-  await lock.deployed();
+  await ownership.deployed();
 
-  console.log("Lock with 1 ETH deployed to:", lock.address);
+  const Warranty = await ethers.getContractFactory("Warranty");
+  const warranty = await Warranty.deploy();
+
+  await warranty.deployed();
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

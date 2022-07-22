@@ -1,6 +1,5 @@
 import {
   Box,
-  chakra,
   Container,
   Stack,
   Text,
@@ -12,7 +11,6 @@ import {
   SimpleGrid,
   StackDivider,
   useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
 } from '@chakra-ui/react';
@@ -168,10 +166,7 @@ export default function Simple() {
               size={'lg'}
               py={'7'}
               textTransform={'uppercase'}
-              _hover={{
-                transform: 'translateY(2px)',
-                boxShadow: 'lg',
-              }}>
+            >
               Add to cart
             </Button>
             <Button
@@ -182,10 +177,8 @@ export default function Simple() {
               size={'lg'}
               py={'7'}
               textTransform={'uppercase'}
-              _hover={{
-                transform: 'translateY(2px)',
-                boxShadow: 'lg',
-              }}>
+              _hover={{ bg: 'teal.500' }}
+            >
               Buy Now
             </Button>
 

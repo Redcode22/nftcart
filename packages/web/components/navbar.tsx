@@ -1,11 +1,19 @@
 import { Avatar, Flex, IconButton, Image, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { selectAccount } from '../features/account/accountSlice'
+import { useAppSelector } from '../hooks/use-app-selector'
 import DarkModeSwitch from './dark-mode-switch'
 import LoginMetamask from './login-metamask'
 import LogoutMetamask from './logout-metamask'
+import UserCart from './user-cart'
 import UserProfileIcon from './user-profile-icon'
 
 const Navbar = () => {
+  let account = useAppSelector(selectAccount)
+  useEffect(() => {
+    console.log('account', account)
+  }
+  , [account])
 
   return (
     <Flex
@@ -18,16 +26,14 @@ const Navbar = () => {
       <Flex
         align={'center'}
       >
-        {/* {
-          address ? (
+        {
+          account ? (
             <>
-              <LogoutMetamask />
+              <UserCart />
               <UserProfileIcon />
             </>
           ) : <LoginMetamask />
-        } */}
-        <LogoutMetamask />
-        <LoginMetamask />
+        }
         <DarkModeSwitch />
       </Flex>
     </Flex>

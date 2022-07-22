@@ -13,14 +13,20 @@
     "@chakra-ui/react": "^2.2.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@reduxjs/toolkit": "^1.8.3",
+    "@stripe/stripe-js": "^1.32.0",
     "ethers": "^5.6.9",
     "framer-motion": "^6",
+    "micro-cors": "^0.1.1",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
+    "stripe": "^9.14.0"
   },
   "devDependencies": {
+    "@types/micro-cors": "^0.1.2",
     "@types/node": "18.0.3",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",

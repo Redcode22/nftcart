@@ -12,10 +12,14 @@ async function main() {
 
   await ownership.deployed();
 
+  console.log("My Ownership NFT deployed to:", ownership.address);
+
   const Warranty = await ethers.getContractFactory("Warranty");
   const warranty = await Warranty.deploy();
 
   await warranty.deployed();
+
+  console.log("My Warranty NFT deployed to:", warranty.address);
 
 }
 

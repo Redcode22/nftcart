@@ -8,7 +8,7 @@ describe("Ownership", () => {
     await ownership.deployed();
 
     const recipient = "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199";
-    const metadataURI = "cid/test.png";
+    const metadataURI = "cid/shoes.png";
     let balance = await ownership.balanceOf(recipient);
     expect(balance).to.equal(0);
 

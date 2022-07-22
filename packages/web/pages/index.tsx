@@ -2,6 +2,7 @@ import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Button, chakra, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import { isValidMotionProp, motion } from 'framer-motion'
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import Navbar from '../components/navbar'
 
 const HomeLogoBox = chakra(motion.div, {
@@ -66,10 +67,12 @@ const Home: NextPage = () => {
           >
             Revolutionizing the warranties of the products with NFTs and the blockchain. Preserving the authenticity.
           </Text>
-          <Button size={'lg'} mt={40}>
-            <ArrowForwardIcon mr={2} />
-            Get Started
-          </Button>
+          <Link href="/list">
+            <Button size={'lg'} mt={40}>
+              <ArrowForwardIcon mr={2} />
+              Get Started
+            </Button>
+          </Link>
         </VStack>
       </Flex>
     </VStack>

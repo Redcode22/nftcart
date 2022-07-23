@@ -1,4 +1,5 @@
 import { Avatar, Flex, IconButton, Image, Text } from '@chakra-ui/react'
+import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { selectAccount } from '../features/account/accountSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
@@ -10,10 +11,6 @@ import UserProfileIcon from './user-profile-icon'
 
 const Navbar = () => {
   let account = useAppSelector(selectAccount)
-  useEffect(() => {
-    console.log('account', account)
-  }
-  , [account])
 
   return (
     <Flex
@@ -22,7 +19,9 @@ const Navbar = () => {
       align={'center'}
       p={4}
     >
-      <Image src='/logo.png' alt='logo' height={'40px'} />
+      <Link href={'/'}>
+        <Image cursor={'pointer'} src='/logo.png' alt='logo' height={'40px'} />
+      </Link>
       <Flex
         align={'center'}
       >

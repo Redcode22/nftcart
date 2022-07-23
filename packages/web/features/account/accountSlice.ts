@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import Account from "../../types/account";
-
 
 export const accountSlice = createSlice({
-  name: 'favourites',
+  name: 'account',
   initialState: '',
   reducers: {
     addAccount: (state: string, action: PayloadAction<string>) => action.payload,

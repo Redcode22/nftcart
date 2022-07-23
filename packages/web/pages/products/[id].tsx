@@ -17,8 +17,21 @@ import {
 import { MdLocalShipping } from 'react-icons/md';
 import { Navbar } from '../../components';
 import Footer from '../../components/footer';
+import { addToCart } from '../../features/cart/cartSlice';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 
-export default function Simple() {
+export default function ProductPage() {
+  const dispatch = useAppDispatch();
+  const handleBuy = () => {
+    dispatch(addToCart(
+      {
+        id: 1,
+        name: 'Product 1',
+        price: 100,
+        image: 'https://picsum.photos/200',
+      },
+    ))
+  }
   return (
     <Container maxW={'100vw'}>
       <Navbar />
@@ -178,6 +191,7 @@ export default function Simple() {
               py={'7'}
               textTransform={'uppercase'}
               _hover={{ bg: 'teal.500' }}
+              onClick={handleBuy}
             >
               Buy Now
             </Button>

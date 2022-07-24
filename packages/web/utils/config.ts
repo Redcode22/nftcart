@@ -8,3 +8,5 @@ export const CURRENCY = 'usd'
 export const MIN_AMOUNT = 10.0
 export const MAX_AMOUNT = 5000.0
 export const AMOUNT_STEP = 5.0
+export const ALCHEMY_URL = "https://polygon-mainnet.g.alchemy.com/v2/g8t9jXvb6amHdy-XuuYYLAj-BmKYkV6D";
+export const ALCHEMY_API_KEY = "g8t9jXvb6amHdy-XuuYYLAj-BmKYkV6D";

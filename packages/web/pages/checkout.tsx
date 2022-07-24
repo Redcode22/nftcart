@@ -13,6 +13,7 @@ const Checkout = () => {
       <Flex
         w={'100%'}
         justifyContent={'space-evenly'}
+        display={{ base: 'block', md: 'flex' }}
       >
         <Box
           display={'flex'}

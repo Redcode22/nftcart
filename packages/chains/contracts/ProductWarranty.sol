@@ -3,16 +3,17 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
+contract ProductWarranty is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Warranty", "RDC") {
+    constructor() ERC721("ProductWarranty", "PRD") {}
+
+    function _baseURI() internal pure override returns (string memory) {
+        return "ipfs://";
     }
 
     function safeMint(address to, string memory uri) public onlyOwner {
@@ -24,7 +25,10 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
 
     // The following functions are overrides required by Solidity.
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 
@@ -37,12 +41,6 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return super.tokenURI(tokenId);
     }
 
-    function safeMint(address to) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-    }
-
     function transferWarranty(address to, uint256 tokenId) public onlyOwner {
         _transfer(msg.sender, to, tokenId);
     }
@@ -51,11 +49,5 @@ contract Warranty is ERC721, ERC721URIStorage, ERC721Burnable, Ownable {
         return ownerOf(tokenId);
     }
 
-    function isUnderWarranty(uint256 tokenId) public view returns(bool) {
-
-    }
-
-    function decayWarranty(uint256 tokenId) public onlyOwner {
-
-    }
+    function decayWarranty(uint256 tokenId) public onlyOwner {}
 }

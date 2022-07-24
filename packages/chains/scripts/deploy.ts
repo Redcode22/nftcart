@@ -1,11 +1,6 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
-
-  const lockedAmount = ethers.utils.parseEther("1");
 
   const Ownership = await ethers.getContractFactory("Ownership");
   const ownership = await Ownership.deploy();
@@ -13,6 +8,13 @@ async function main() {
   await ownership.deployed();
 
   console.log("My Ownership NFT deployed to:", ownership.address);
+
+  const ProductOwnership = await ethers.getContractFactory("ProductOwnership");
+  const productOwnership = await ProductOwnership.deploy();
+
+  await productOwnership.deployed();
+
+  console.log("My Product Ownership NFT deployed to:", productOwnership.address);
 
   const Warranty = await ethers.getContractFactory("Warranty");
   const warranty = await Warranty.deploy();

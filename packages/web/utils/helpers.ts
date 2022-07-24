@@ -47,3 +47,7 @@ export function formatAmountFromStripe(
   }
   return zeroDecimalCurrency ? amount : Math.round(amount / 100)
 }
+
+export function sendJSONToIpfs(data: any) {
+
+}

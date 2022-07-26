@@ -1,12 +1,24 @@
 import { CheckCircleIcon } from '@chakra-ui/icons'
 import { Box, Flex, Grid, GridItem, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar } from '../components'
 import Footer from '../components/footer'
 import ProductCard from '../components/product-card'
 import { BiCartAlt } from 'react-icons/bi'
+import StrapiApi from '../api/StrapiApi'
 
 const List = () => {
+  const [products, setProducts] = React.useState([])
+  const Api = new StrapiApi();
+
+  useEffect(() => {
+    getProducts();
+  }, [])
+  const getProducts = async () => {
+    const products = await Api.getAllProducts()
+    console.log(products)
+    setProducts(products.data)
+  }
   return (
     <VStack
       minH={'100vh'}
@@ -39,33 +51,13 @@ const List = () => {
       </Tabs>
       <Flex dir='col' justifyContent={'center'}>
         <Grid m={'5'} w={'100%'} templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(4, 1fr)' }} gap={5}>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
-          <GridItem w='100%' >
-            <ProductCard />
-          </GridItem>
+          {products.length > 0 && products.map((phone, index) => {
+            return (
+              <GridItem w='100%' key={index}>
+                <ProductCard phone={phone} />
+              </GridItem>
+            )
+          })}
         </Grid>
       </Flex>
       <Footer />

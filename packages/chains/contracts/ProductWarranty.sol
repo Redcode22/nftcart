@@ -9,8 +9,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract ProductWarranty is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
+    constructor() ERC721("ProductWarranty", "PRD") {
+    }
 
-    constructor() ERC721("ProductWarranty", "PRD") {}
 
     function _baseURI() internal pure override returns (string memory) {
         return "ipfs://";
@@ -22,8 +23,6 @@ contract ProductWarranty is ERC721, ERC721URIStorage, Ownable {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
     }
-
-    // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId)
         internal

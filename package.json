@@ -26,7 +26,9 @@
     "docs": "yarn workspace docs dev",
     "docs:compile": "yarn workspace docs compile",
     "docs:test": "yarn workspace docs test",
-    "docs:test:ci": "yarn workspace docs test:ci"
+    "docs:test:ci": "yarn workspace docs test:ci",
+    "cms:develop": "yarn workspace cms develop",
+    "cms:build": "yarn workspace cms build"
   },
   "author": "",
   "license": "ISC",

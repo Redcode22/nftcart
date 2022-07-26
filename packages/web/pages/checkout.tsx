@@ -2,8 +2,11 @@ import { Box, Button, Flex, Heading, Image, Input, Text, Textarea, VStack } from
 import React from 'react'
 import { Navbar } from '../components'
 import Footer from '../components/footer'
+import { selectCart } from '../features/cart/cartSlice'
+import { useAppSelector } from '../hooks/use-app-selector'
 
 const Checkout = () => {
+  const product = useAppSelector(selectCart);
   return (
     <VStack
       maxH={'100vh'}

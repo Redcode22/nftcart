@@ -14,23 +14,40 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { MdLocalShipping } from 'react-icons/md';
+import StrapiApi from '../../api/StrapiApi';
 import { Navbar } from '../../components';
 import Footer from '../../components/footer';
 import { addToCart } from '../../features/cart/cartSlice';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 
-export default function ProductPage() {
+ProductPage.getInitialProps = async ({ query }: any) => {
+  return { query }
+}
+
+export default function ProductPage({ query }: any) {
   const dispatch = useAppDispatch();
+  const Api = new StrapiApi();
+  const [product, setProduct] = React.useState({});
   const handleBuy = () => {
     dispatch(addToCart(
       {
-        id: 1,
-        name: 'Product 1',
-        price: 100,
-        image: 'https://picsum.photos/200',
+        id: query.id,
+        name: product.name,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        description: product.description,
       },
     ))
+  }
+  useEffect(() => {
+    getProductById();
+  }, [])
+  const getProductById = async () => {
+    const result = await Api.getProductByID(query.id)
+    setProduct(result.data.attributes)
   }
   return (
     <Container maxW={'100vw'}>
@@ -45,11 +62,11 @@ export default function ProductPage() {
               rounded={'md'}
               alt={'product image'}
               src={
-                'https://cdn.vox-cdn.com/thumbor/Eu5ze2W1RmZQjxX2GqhIxWgvm4g=/0x0:2000x1284/1200x0/filters:focal(0x0:2000x1284):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/8834801/pizza_shoe12.jpg'
+                product.imageUrl
               }
               fit={'cover'}
               align={'center'}
-              w={'100%'}
+              w={{ base: '100%', sm: '400px', lg: '500px' }}
               h={{ base: '100%', sm: '400px', lg: '500px' }}
             />
           </Flex>
@@ -59,13 +76,13 @@ export default function ProductPage() {
                 lineHeight={1.1}
                 fontWeight={600}
                 fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
-                Pizza Shoes
+                {product.name}
               </Heading>
               <Text
                 color={useColorModeValue('gray.900', 'gray.400')}
                 fontWeight={300}
                 fontSize={'2xl'}>
-                $1900.00 USD
+                Rs. {product.price}
               </Text>
             </Box>
 
@@ -82,14 +99,7 @@ export default function ProductPage() {
                   color={useColorModeValue('gray.500', 'gray.400')}
                   fontSize={'2xl'}
                   fontWeight={'300'}>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore
-                </Text>
-                <Text fontSize={'lg'}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                  aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                  maxime modi nam officiis porro, quae, quisquam quos
-                  reprehenderit velit? Natus, totam.
+                  {product.description}
                 </Text>
               </VStack>
               <Box>
@@ -128,31 +138,31 @@ export default function ProductPage() {
                 <List spacing={2}>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Between lugs:
+                      Ram:
                     </Text>{' '}
-                    20 mm
+                    6 GB
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Bracelet:
+                      ROM:
                     </Text>{' '}
-                    leather strap
+                    128GB
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Case:
+                      Custom UI:
                     </Text>{' '}
-                    Steel
+                    Funtouch
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Case diameter:
+                      Screen Size:
                     </Text>{' '}
-                    42 mm
+                    6.45 inches
                   </ListItem>
                   <ListItem>
                     <Text as={'span'} fontWeight={'bold'}>
-                      Dial color:
+                      Color:
                     </Text>{' '}
                     Black
                   </ListItem>

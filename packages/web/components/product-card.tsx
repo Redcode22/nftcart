@@ -14,25 +14,17 @@ const property = {
   rating: 4,
 }
 
-const ProductCard = () => {
+const ProductCard = ({ phone }: any) => {
+  const { id } = phone
+  const { imageUrl, name, price } = phone.attributes;
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m={4}>
-      <Image src={property.imageUrl} alt={property.imageAlt} />
+      <Image src={imageUrl} alt={property.imageAlt} />
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' colorScheme='teal'>
             New
           </Badge>
-          <Box
-            color='gray.500'
-            fontWeight='semibold'
-            letterSpacing='wide'
-            fontSize='xs'
-            textTransform='uppercase'
-            ml='2'
-          >
-            {property.beds} beds &bull; {property.baths} baths
-          </Box>
         </Box>
 
         <Box
@@ -42,11 +34,11 @@ const ProductCard = () => {
           lineHeight='tight'
           noOfLines={1}
         >
-          {property.title}
+          {name}
         </Box>
 
         <Box>
-          {property.formattedPrice}
+          Rs {price}
         </Box>
 
         <Flex justifyContent={'space-between'} mt='2' alignItems='center'>
@@ -63,7 +55,7 @@ const ProductCard = () => {
               {property.reviewCount} reviews
             </Box>
           </Box>
-          <Link href={'/products/1'}>
+          <Link href={'/products/' + id}>
             <Button>
               <ArrowForwardIcon mr={2} />
               View

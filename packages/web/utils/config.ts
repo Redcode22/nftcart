@@ -10,3 +10,5 @@ export const MAX_AMOUNT = 5000.0
 export const AMOUNT_STEP = 5.0
 export const ALCHEMY_URL = "https://polygon-mainnet.g.alchemy.com/v2/g8t9jXvb6amHdy-XuuYYLAj-BmKYkV6D";
 export const ALCHEMY_API_KEY = "g8t9jXvb6amHdy-XuuYYLAj-BmKYkV6D";
+export const PINATA_API_KEY = ""
+export const PINATA_SECRET_API_KEY = ""

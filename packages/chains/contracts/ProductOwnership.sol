@@ -39,7 +39,7 @@ contract ProductOwnership is ERC721, ERC721URIStorage, Ownable {
     {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _mint(buyer, newItemId);
+        _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, uri);
         _transfer(msg.sender, buyer, newItemId);
         return newItemId;

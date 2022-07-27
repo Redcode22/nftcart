@@ -1,5 +1,5 @@
 export const NFT_ADDRESS = "";
-export const CONTRACT_ADDRESS = ""
+export const CONTRACT_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
 export const PINATA_CONTENT_ID = "d6b7e28732e3f2680c8b"
 export const STRIPE_SECRET_KEY = ""
 export const NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""

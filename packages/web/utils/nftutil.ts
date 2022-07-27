@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
-import { PINATA_API_KEY, PINATA_SECRET_API_KEY } from "./config";
+import { CONTRACT_ADDRESS, PINATA_API_KEY, PINATA_SECRET_API_KEY } from "./config";
+import NFTWarranty_ABI from '../abis/NFTWarranty_ABI.json'
+import { generateSerialId } from "./helpers";
 
 export async function sendFileToIPFS(jsonData: any) {
   try {
@@ -29,13 +31,22 @@ export async function sendFileToIPFS(jsonData: any) {
     return await response.json();
   } catch (err) {
     console.log(err)
+    return null;
   }
 }
 
-export async function mintNft(tokenUri: string) {
+export async function generateNft(tokenUri: string) {
+  let serialId = generateSerialId();
   const provider = new ethers.providers.Web3Provider(window.ethereum)
+  await window.ethereum.enable()
   const accounts = await provider.send("eth_requestAccounts", []);
-  const contract = new ethers.Contract('', '', provider);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTWarranty_ABI, provider);
+  const signer = provider.getSigner()
+  const contractWithSigner = contract.connect(signer);
+  console.log(contractWithSigner)
+  const result = await contractWithSigner.mint(tokenUri, serialId);
+
+  return result;
 }
 
 export async function getJsonByHash(hash: string) {

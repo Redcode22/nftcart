@@ -2,26 +2,12 @@ import { ethers } from "hardhat";
 
 async function main() {
 
-  const Ownership = await ethers.getContractFactory("Ownership");
-  const ownership = await Ownership.deploy();
+  const NFTWarranty = await ethers.getContractFactory("NFTWarranty");
+  const nftWarranty = await NFTWarranty.deploy();
 
-  await ownership.deployed();
+  await nftWarranty.deployed();
 
-  console.log("My Ownership NFT deployed to:", ownership.address);
-
-  const ProductOwnership = await ethers.getContractFactory("ProductOwnership");
-  const productOwnership = await ProductOwnership.deploy();
-
-  await productOwnership.deployed();
-
-  console.log("My Product Ownership NFT deployed to:", productOwnership.address);
-
-  const Warranty = await ethers.getContractFactory("Warranty");
-  const warranty = await Warranty.deploy();
-
-  await warranty.deployed();
-
-  console.log("My Warranty NFT deployed to:", warranty.address);
+  console.log("My NFT Warranty contract deployed to:", nftWarranty.address);
 
 }
 

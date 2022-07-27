@@ -1,12 +1,69 @@
 import { Box, Button, Flex, Heading, Image, Input, Text, Textarea, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar } from '../components'
 import Footer from '../components/footer'
+import { selectAccount } from '../features/account/accountSlice'
 import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
+import { sendFileToIPFS } from '../utils/nftutil'
+import StrapiApi from '../api/StrapiApi'
+
+const initialState = {
+  name: '',
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  state: '',
+}
 
 const Checkout = () => {
+  const Api = new StrapiApi()
+
   const product = useAppSelector(selectCart);
+  const address = useAppSelector(selectAccount);
+  const [values, setValues] = useState(initialState);
+
+  const handleBuy = async () => {
+    const data = {
+      ...values,
+      ...product,
+      walletAddress: address,
+    }
+    // TODO: Upload json data to pinata
+    const nftData = await sendFileToIPFS(data)
+
+    // TODO: Add to orders
+
+    // TODO: Generate NFT for ownership
+
+    // TODO: Generate NFT for warranty
+  }
+
+  const handleValues = (e: any) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  }
+
+  if (Object.entries(product).length === 0) {
+    return (
+      <Flex
+        width='100%'
+        minH='100vh'
+        flexDir={'column'}
+        justifyContent={'space-between'}
+        alignItems={'center'}
+      >
+        <Navbar />
+        <Box>
+          <Heading textAlign={'center'}>Checkout</Heading>
+          <Text textAlign={'center'}>You have no items in your cart</Text>
+        </Box>
+        <Footer />
+      </Flex>
+    )
+  }
+
   return (
     <VStack
       maxH={'100vh'}
@@ -25,16 +82,16 @@ const Checkout = () => {
           justifyContent={'center'}
         >
           <Heading>Checkout</Heading>
-          <Image my={10} src={'https://picsum.photos/id/2/600/400'} rounded={'xl'} />
+          <Image my={10} src={product.imageUrl} rounded={'xl'} />
           <Flex
             justifyContent={'space-between'}
             width={'100%'}
           >
             <Box>
-              <Text fontSize={'2xl'}>Pizza Shoes</Text>
-              <Text>XL</Text>
+              <Text fontSize={'2xl'}>{product.name}</Text>
+              <Text>{product.id}</Text>
             </Box>
-            <Text fontSize={'4xl'}>$1,900.00</Text>
+            <Text fontSize={'4xl'}>Rs {product.price}</Text>
           </Flex>
 
         </Box>
@@ -44,11 +101,49 @@ const Checkout = () => {
           w={'400px'}
         >
           <Heading textAlign={'center'}>Add Details</Heading>
-          <Input my={'4'} placeholder={'Name'} />
-          <Input my={'4'} placeholder={'Email'} />
-          <Input my={'4'} placeholder={'Phone'} />
-          <Textarea my={'4'} placeholder='Enter your Address' />
-          <Button my={'4'} bg={'teal'}>
+          <Input
+            my={'4'}
+            placeholder={'Name'}
+            name='name'
+            value={values.name}
+            onChange={handleValues}
+          />
+          <Input
+            my={'4'}
+            placeholder={'Email'}
+            name='email'
+            value={values.email}
+            onChange={handleValues}
+          />
+          <Input
+            my={'4'}
+            placeholder={'Phone'}
+            name='phone'
+            value={values.phone}
+            onChange={handleValues}
+          />
+          <Textarea
+            my={'4'}
+            placeholder='Enter your Address'
+            name='address' value={values.address}
+            onChange={handleValues}
+          />
+          <Input
+            my={'4'}
+            placeholder={'City'}
+            name='city'
+            value={values.city}
+            onChange={handleValues}
+          />
+          <Input
+            my={'4'}
+            placeholder={'State'}
+            name='state'
+            value={values.state}
+            onChange={handleValues}
+          />
+
+          <Button my={'4'} bg={'teal'} onClick={handleBuy}>
             Place Order
           </Button>
         </Box>

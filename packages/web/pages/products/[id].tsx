@@ -31,6 +31,8 @@ export default function ProductPage({ query }: any) {
   const dispatch = useAppDispatch();
   const Api = new StrapiApi();
   const [product, setProduct] = React.useState({});
+  const router = useRouter();
+
   const handleBuy = () => {
     dispatch(addToCart(
       {
@@ -38,17 +40,21 @@ export default function ProductPage({ query }: any) {
         name: product.name,
         price: product.price,
         imageUrl: product.imageUrl,
-        description: product.description,
+        description: product.description
       },
     ))
+    router.push('/checkout');
   }
+
   useEffect(() => {
     getProductById();
   }, [])
+
   const getProductById = async () => {
     const result = await Api.getProductByID(query.id)
     setProduct(result.data.attributes)
   }
+  
   return (
     <Container maxW={'100vw'}>
       <Navbar />

@@ -33,7 +33,9 @@ class StrapiApi {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(order)
+      body: JSON.stringify({
+        
+      })
     })
     return await response.json();
   }

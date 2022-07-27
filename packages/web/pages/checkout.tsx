@@ -1,11 +1,11 @@
-import { Box, Button, Flex, Heading, Image, Input, Text, Textarea, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Image, Input, Text, Textarea, useToast, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Navbar } from '../components'
 import Footer from '../components/footer'
 import { selectAccount } from '../features/account/accountSlice'
 import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
-import { sendFileToIPFS } from '../utils/nftutil'
+import { generateNft, sendFileToIPFS } from '../utils/nftutil'
 import StrapiApi from '../api/StrapiApi'
 
 const initialState = {
@@ -19,6 +19,7 @@ const initialState = {
 
 const Checkout = () => {
   const Api = new StrapiApi()
+  const toast = useToast()
 
   const product = useAppSelector(selectCart);
   const address = useAppSelector(selectAccount);
@@ -31,13 +32,21 @@ const Checkout = () => {
       walletAddress: address,
     }
     // TODO: Upload json data to pinata
-    const nftData = await sendFileToIPFS(data)
+    const ipfsData = await sendFileToIPFS(data)
 
     // TODO: Add to orders
 
-    // TODO: Generate NFT for ownership
+    const nftData = await generateNft(ipfsData.IpfsHash)
 
-    // TODO: Generate NFT for warranty
+    const order = await Api.addOrder({ ...data, nftData })
+
+    toast({
+      title: 'Success',
+      description: 'Order placed successfully',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   const handleValues = (e: any) => {

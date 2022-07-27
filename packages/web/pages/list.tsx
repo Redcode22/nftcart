@@ -1,5 +1,5 @@
 import { CheckCircleIcon } from '@chakra-ui/icons'
-import { Box, Flex, Grid, GridItem, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Heading, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { Navbar } from '../components'
 import Footer from '../components/footer'
@@ -20,7 +20,6 @@ const List = () => {
     setProducts(products.data)
     setLoading(false)
   }
-
 
   return (
     <VStack
@@ -44,12 +43,13 @@ const List = () => {
           The best products to ever get.
         </Heading>
       </Box>
+      <Spacer h={'20px'} />
       <Tabs className='no-scroll' variant='soft-rounded' colorScheme='teal' overflowX={'scroll'}>
         <TabList>
           <Tab>New Arrival</Tab>
-          <Tab>Sneakers</Tab>
-          <Tab>Boots</Tab>
-          <Tab>Loafers</Tab>
+          <Tab>Budget</Tab>
+          <Tab>Mid Range</Tab>
+          <Tab>Flagship</Tab>
         </TabList>
       </Tabs>
       {loading ? <div>Loading...</div> 

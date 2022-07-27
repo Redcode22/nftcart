@@ -1,11 +1,5 @@
 import { ethers } from "ethers";
 
-import ProductOwnership_ABI from '../abis/ProductOwnership_ABI.json'
-
-export const loadCurrentMessage = async () => {
-
-};
-
 export const connectWallet = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const accounts = await provider.send("eth_requestAccounts", []);

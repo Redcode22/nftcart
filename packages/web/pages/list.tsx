@@ -9,6 +9,7 @@ import StrapiApi from '../api/StrapiApi'
 
 const List = () => {
   const [products, setProducts] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
   const Api = new StrapiApi();
 
   useEffect(() => {
@@ -16,9 +17,11 @@ const List = () => {
   }, [])
   const getProducts = async () => {
     const products = await Api.getAllProducts()
-    console.log(products)
     setProducts(products.data)
+    setLoading(false)
   }
+
+
   return (
     <VStack
       minH={'100vh'}
@@ -49,19 +52,22 @@ const List = () => {
           <Tab>Loafers</Tab>
         </TabList>
       </Tabs>
-      <Flex dir='col' justifyContent={'center'}>
-        <Grid m={'5'} w={'100%'} templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(4, 1fr)' }} gap={5}>
-          {products.length > 0 && products.map((phone, index) => {
-            return (
-              <GridItem w='100%' key={index}>
-                <ProductCard phone={phone} />
-              </GridItem>
-            )
-          })}
-        </Grid>
-      </Flex>
+      {loading ? <div>Loading...</div> 
+          : (
+          <Flex dir='col' justifyContent={'center'}>
+            <Grid m={'5'} w={'100%'} templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(4, 1fr)' }} gap={5}>
+              {products.length > 0 && products.map((phone, index) => {
+                return (
+                  <GridItem w='100%' key={index}>
+                    <ProductCard phone={phone} />
+                  </GridItem>
+                )
+              })}
+            </Grid>
+          </Flex >)
+      }
       <Footer />
-    </VStack>
+    </VStack >
   )
 }
 

@@ -6,6 +6,7 @@ import { selectAccount } from '../features/account/accountSlice'
 import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
 import { sendFileToIPFS } from '../utils/nftutil'
+import StrapiApi from '../api/StrapiApi'
 
 const initialState = {
   name: '',
@@ -17,11 +18,11 @@ const initialState = {
 }
 
 const Checkout = () => {
+  const Api = new StrapiApi()
 
   const product = useAppSelector(selectCart);
   const address = useAppSelector(selectAccount);
   const [values, setValues] = useState(initialState);
-  console.log(product)
 
   const handleBuy = async () => {
     const data = {
@@ -29,9 +30,10 @@ const Checkout = () => {
       ...product,
       walletAddress: address,
     }
-    console.log(data);
     // TODO: Upload json data to pinata
-    await sendFileToIPFS(data)
+    const nftData = await sendFileToIPFS(data)
+
+    // TODO: Add to orders
 
     // TODO: Generate NFT for ownership
 

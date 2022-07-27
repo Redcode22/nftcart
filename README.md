@@ -21,7 +21,10 @@ This is docusaurus generated documentation web application to reflect the basic
 - Hardhat
 - Next.js
 - Typescript
-- Sanity
+- Strapi
 - Chakra UI
 - Next.js
 - Ethers
+- Docusaurus
+- Redux
+- Metamask

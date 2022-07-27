@@ -1,6 +1,8 @@
-import { Avatar, Flex, IconButton, Image, Text } from '@chakra-ui/react'
+import { AddIcon, ExternalLinkIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { Avatar, Flex, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
+import { BiCart, BiUser } from 'react-icons/bi'
 import { selectAccount } from '../features/account/accountSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
 import DarkModeSwitch from './dark-mode-switch'
@@ -28,8 +30,21 @@ const Navbar = () => {
         {
           account ? (
             <>
-              <UserCart />
-              <UserProfileIcon />
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label='Options'
+                  icon={<HamburgerIcon />}
+                />
+                <MenuList>
+                  <MenuItem icon={<BiCart />} command='⌘T'>
+                    Cart
+                  </MenuItem>
+                  <MenuItem icon={<BiUser />} command='⌘N'>
+                    Profile
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </>
           ) : <LoginMetamask />
         }

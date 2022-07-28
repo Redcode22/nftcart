@@ -120,14 +120,14 @@ export default function ProductPage({ query }: any) {
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                   <List spacing={2}>
-                    <ListItem>Chronograph</ListItem>
-                    <ListItem>Master Chronometer Certified</ListItem>{' '}
-                    <ListItem>Tachymeter</ListItem>
+                    <ListItem>Proximity</ListItem>
+                    <ListItem>Fast Charging</ListItem>{' '}
+                    <ListItem>Splash Proof</ListItem>
                   </List>
                   <List spacing={2}>
-                    <ListItem>Anti‑magnetic</ListItem>
-                    <ListItem>Chronometer</ListItem>
-                    <ListItem>Small seconds</ListItem>
+                    <ListItem>Best Price</ListItem>
+                    <ListItem>AMOLED Display</ListItem>
+                    <ListItem>Fingerprint</ListItem>
                   </List>
                 </SimpleGrid>
               </Box>

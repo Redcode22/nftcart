@@ -14,19 +14,17 @@ const property = {
   rating: 4,
 }
 
-const ProductCard = ({ phone }: any) => {
-  const { id } = phone
-  const { imageUrl, name, price, collection } = phone.attributes;
+const OrderCard = ({ order }: any) => {
+  const { address, name, serialId } = order
   return (
-    <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m={4}>
-      <Image src={imageUrl} alt={property.imageAlt} />
+    <Box w='100%' borderWidth='1px' borderRadius='lg' overflow='hidden' m={4}>
+      {/* <Image src={imageUrl} alt={property.imageAlt} /> */}
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' colorScheme='teal'>
-            {collection}
+            New
           </Badge>
         </Box>
-
         <Box
           mt='1'
           fontWeight='semibold'
@@ -34,37 +32,23 @@ const ProductCard = ({ phone }: any) => {
           lineHeight='tight'
           noOfLines={1}
         >
-          {name}
+          {address}
         </Box>
 
         <Box>
-          Rs {price}
+          {name}
         </Box>
 
         <Flex justifyContent={'space-between'} mt='2' alignItems='center'>
           <Box>
-            {Array(5)
-              .fill('')
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i < property.rating ? 'teal.500' : 'gray.300'}
-                />
-              ))}
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-              {property.reviewCount} reviews
+              {serialId}
             </Box>
           </Box>
-          <Link href={'/products/' + id}>
-            <Button>
-              <ArrowForwardIcon mr={2} />
-              View
-            </Button>
-          </Link>
         </Flex>
       </Box>
     </Box>
   )
 }
 
-export default ProductCard
+export default OrderCard

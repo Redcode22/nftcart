@@ -20,6 +20,12 @@
     },
     "serialID": {
       "type": "string"
+    },
+    "expiry": {
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
     }
   }
 }

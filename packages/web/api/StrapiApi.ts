@@ -39,7 +39,8 @@ class StrapiApi {
           address: order.walletAddress,
           name: order.name,
           serialId: order.serialId,
-          hash: order.nftData.hash
+          hash: order.nftData.hash,
+          expiry: order.nftData.expiry,
         }
       })
     })

@@ -8,6 +8,7 @@ import { useAppSelector } from '../hooks/use-app-selector'
 import { generateNft, getAllNfts, sendFileToIPFS } from '../utils/nftutil'
 import StrapiApi from '../api/StrapiApi'
 import { generateSerialId } from '../utils/helpers'
+import { useRouter } from 'next/router'
 
 const initialState = {
   name: '',
@@ -25,6 +26,7 @@ const Checkout = () => {
   const product = useAppSelector(selectCart);
   const address = useAppSelector(selectAccount);
   const [values, setValues] = useState(initialState);
+  const router = useRouter()
 
   const handleBuy = async () => {
     const serialId = generateSerialId();
@@ -51,19 +53,18 @@ const Checkout = () => {
         duration: 9000,
         isClosable: true,
       })
-    } catch (e) {
+      router.push('/orders')
+    } catch (e: any) {
       toast({
         title: 'Error',
         description: e.message,
-        status: 'failed',
+        status: 'error',
         duration: 9000,
         isClosable: true,
       })
     }
 
     // await getAllNfts()
-
-
   }
 
   const handleValues = (e: any) => {

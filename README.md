@@ -16,6 +16,9 @@ Following package consists of the smart contracts and their tests written in sol
 ### 4. docs
 This is docusaurus generated documentation web application to reflect the basic
 
+### 5. mobile
+This package will be furthur developed to work as mobile application.
+
 ## Technologies
 - Solidity
 - Hardhat
@@ -28,3 +31,11 @@ This is docusaurus generated documentation web application to reflect the basic
 - Docusaurus
 - Redux
 - Metamask
+
+## Aspects
+- Clean code
+- Swagger docs for CMS
+- Admin panel via Strapi
+- Web implementation of NFTcart
+- Mobile application extensiblity
+- Documentation for the project

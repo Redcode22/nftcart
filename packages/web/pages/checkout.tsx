@@ -5,8 +5,9 @@ import Footer from '../components/footer'
 import { selectAccount } from '../features/account/accountSlice'
 import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
-import { generateNft, sendFileToIPFS } from '../utils/nftutil'
+import { generateNft, getAllNfts, sendFileToIPFS } from '../utils/nftutil'
 import StrapiApi from '../api/StrapiApi'
+import { generateSerialId } from '../utils/helpers'
 
 const initialState = {
   name: '',
@@ -26,27 +27,43 @@ const Checkout = () => {
   const [values, setValues] = useState(initialState);
 
   const handleBuy = async () => {
+    const serialId = generateSerialId();
     const data = {
       ...values,
       ...product,
       walletAddress: address,
+      serialId: serialId
     }
     // TODO: Upload json data to pinata
-    const ipfsData = await sendFileToIPFS(data)
+    try {
 
-    // TODO: Add to orders
+      const ipfsData = await sendFileToIPFS(data)
 
-    const nftData = await generateNft(ipfsData.IpfsHash)
+      // TODO: Add to orders
 
-    const order = await Api.addOrder({ ...data, nftData })
+      const nftData = await generateNft(ipfsData.IpfsHash, serialId)
 
-    toast({
-      title: 'Success',
-      description: 'Order placed successfully',
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+      const order = await Api.addOrder({ ...data, nftData })
+      toast({
+        title: 'Success',
+        description: 'Order placed successfully',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: e.message,
+        status: 'failed',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
+    // await getAllNfts()
+
+
   }
 
   const handleValues = (e: any) => {
@@ -152,8 +169,13 @@ const Checkout = () => {
             onChange={handleValues}
           />
 
-          <Button my={'4'} bg={'teal'} onClick={handleBuy}>
-            Place Order
+          <Button
+            my={'4'}
+            bg={'teal'}
+            onClick={handleBuy}
+            disabled={address === ""}
+          >
+            {address === "" ? "Enable the wallet" : "Place Order"}
           </Button>
         </Box>
       </Flex>

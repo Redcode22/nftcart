@@ -28,13 +28,19 @@ class StrapiApi {
   }
 
   addOrder = async (order: any) => {
+    console.log(order)
     const response = await fetch(this.baseUrl + "/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        
+        data: {
+          address: order.walletAddress,
+          name: order.name,
+          serialId: order.serialId,
+          hash: order.nftData.hash
+        }
       })
     })
     return await response.json();

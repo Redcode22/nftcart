@@ -4,20 +4,21 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Address": {
+    "address": {
       "type": "string"
     },
-    "Name": {
+    "name": {
       "type": "string"
     },
-    "SerialID": {
+    "serialID": {
       "type": "string"
     }
   }

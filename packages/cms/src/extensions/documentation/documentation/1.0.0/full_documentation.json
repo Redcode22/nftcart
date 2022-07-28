@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2022-07-27T13:33:33.654Z"
+    "x-generation-date": "2022-07-28T07:05:10.397Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -149,13 +149,13 @@
                               "attributes": {
                                 "type": "object",
                                 "properties": {
-                                  "Address": {
+                                  "address": {
                                     "type": "string"
                                   },
-                                  "Name": {
+                                  "name": {
                                     "type": "string"
                                   },
-                                  "SerialID": {
+                                  "serialID": {
                                     "type": "string"
                                   },
                                   "createdAt": {
@@ -567,13 +567,13 @@
                             "attributes": {
                               "type": "object",
                               "properties": {
-                                "Address": {
+                                "address": {
                                   "type": "string"
                                 },
-                                "Name": {
+                                "name": {
                                   "type": "string"
                                 },
-                                "SerialID": {
+                                "serialID": {
                                   "type": "string"
                                 },
                                 "createdAt": {
@@ -945,13 +945,13 @@
             "required": [],
             "type": "object",
             "properties": {
-              "Address": {
+              "address": {
                 "type": "string"
               },
-              "Name": {
+              "name": {
                 "type": "string"
               },
-              "SerialID": {
+              "serialID": {
                 "type": "string"
               }
             }
@@ -972,13 +972,13 @@
                 "attributes": {
                   "type": "object",
                   "properties": {
-                    "Address": {
+                    "address": {
                       "type": "string"
                     },
-                    "Name": {
+                    "name": {
                       "type": "string"
                     },
-                    "SerialID": {
+                    "serialID": {
                       "type": "string"
                     },
                     "createdAt": {
@@ -1320,13 +1320,13 @@
               "attributes": {
                 "type": "object",
                 "properties": {
-                  "Address": {
+                  "address": {
                     "type": "string"
                   },
-                  "Name": {
+                  "name": {
                     "type": "string"
                   },
-                  "SerialID": {
+                  "serialID": {
                     "type": "string"
                   },
                   "createdAt": {

@@ -35,8 +35,7 @@ export async function sendFileToIPFS(jsonData: any) {
   }
 }
 
-export async function generateNft(tokenUri: string) {
-  let serialId = generateSerialId();
+export async function generateNft(tokenUri: string, serialId:string) {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   await window.ethereum.enable()
   const accounts = await provider.send("eth_requestAccounts", []);
@@ -47,6 +46,18 @@ export async function generateNft(tokenUri: string) {
   const result = await contractWithSigner.mint(tokenUri, serialId);
 
   return result;
+}
+
+export async function getAllNfts() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await window.ethereum.enable();
+  const accounts = await provider.send("eth_requestAccounts", []);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTWarranty_ABI, provider);
+  const signer = provider.getSigner()
+  const contractWithSigner = contract.connect(signer);
+
+  const nfts = await contractWithSigner.getPublishedByUser();
+  console.log(nfts)
 }
 
 export async function getJsonByHash(hash: string) {

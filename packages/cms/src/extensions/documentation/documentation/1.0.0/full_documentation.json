@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2022-07-27T13:33:33.654Z"
+    "x-generation-date": "2022-07-30T20:52:53.644Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -149,13 +149,19 @@
                               "attributes": {
                                 "type": "object",
                                 "properties": {
-                                  "Address": {
+                                  "address": {
                                     "type": "string"
                                   },
-                                  "Name": {
+                                  "name": {
                                     "type": "string"
                                   },
-                                  "SerialID": {
+                                  "serialId": {
+                                    "type": "string"
+                                  },
+                                  "expiry": {
+                                    "type": "string"
+                                  },
+                                  "hash": {
                                     "type": "string"
                                   },
                                   "createdAt": {
@@ -567,13 +573,19 @@
                             "attributes": {
                               "type": "object",
                               "properties": {
-                                "Address": {
+                                "address": {
                                   "type": "string"
                                 },
-                                "Name": {
+                                "name": {
                                   "type": "string"
                                 },
-                                "SerialID": {
+                                "serialId": {
+                                  "type": "string"
+                                },
+                                "expiry": {
+                                  "type": "string"
+                                },
+                                "hash": {
                                   "type": "string"
                                 },
                                 "createdAt": {
@@ -945,13 +957,19 @@
             "required": [],
             "type": "object",
             "properties": {
-              "Address": {
+              "address": {
                 "type": "string"
               },
-              "Name": {
+              "name": {
                 "type": "string"
               },
-              "SerialID": {
+              "serialId": {
+                "type": "string"
+              },
+              "expiry": {
+                "type": "string"
+              },
+              "hash": {
                 "type": "string"
               }
             }
@@ -972,13 +990,19 @@
                 "attributes": {
                   "type": "object",
                   "properties": {
-                    "Address": {
+                    "address": {
                       "type": "string"
                     },
-                    "Name": {
+                    "name": {
                       "type": "string"
                     },
-                    "SerialID": {
+                    "serialId": {
+                      "type": "string"
+                    },
+                    "expiry": {
+                      "type": "string"
+                    },
+                    "hash": {
                       "type": "string"
                     },
                     "createdAt": {
@@ -1320,13 +1344,19 @@
               "attributes": {
                 "type": "object",
                 "properties": {
-                  "Address": {
+                  "address": {
                     "type": "string"
                   },
-                  "Name": {
+                  "name": {
                     "type": "string"
                   },
-                  "SerialID": {
+                  "serialId": {
+                    "type": "string"
+                  },
+                  "expiry": {
+                    "type": "string"
+                  },
+                  "hash": {
                     "type": "string"
                   },
                   "createdAt": {

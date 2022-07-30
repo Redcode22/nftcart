@@ -16,14 +16,14 @@ const property = {
 
 const ProductCard = ({ phone }: any) => {
   const { id } = phone
-  const { imageUrl, name, price } = phone.attributes;
+  const { imageUrl, name, price, collection } = phone.attributes;
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m={4}>
-      <Image src={imageUrl} alt={property.imageAlt} />
+      <Image src={imageUrl} alt={property.imageAlt} borderWidth='1px' borderRadius='lg' />
       <Box p='6'>
         <Box display='flex' alignItems='baseline'>
           <Badge borderRadius='full' px='2' colorScheme='teal'>
-            New
+            {collection}
           </Badge>
         </Box>
 

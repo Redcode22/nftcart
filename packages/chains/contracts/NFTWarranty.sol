@@ -130,6 +130,15 @@ contract NFTWarranty is ERC721URIStorage, Ownable {
         approve(address(this), tokenID);
     }
 
+    function isUnderWarranty(uint256 tokenID) public returns(bool)  {
+        require(publishedTokens[tokenID].expiry != 0, "Warranty Doesn't exist");
+        require(
+            block.timestamp > publishedTokens[tokenID].expiry,
+            "Warranty is expired"
+        );
+        return true;
+    }
+
     function burnNFTByID(uint256 tokenID) public payable {
         require(publishedTokens[tokenID].expiry != 0, "Warranty Doesn't exist");
         require(

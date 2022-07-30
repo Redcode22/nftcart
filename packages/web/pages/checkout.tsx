@@ -5,8 +5,10 @@ import Footer from '../components/footer'
 import { selectAccount } from '../features/account/accountSlice'
 import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
-import { generateNft, sendFileToIPFS } from '../utils/nftutil'
+import { generateNft, getAllNfts, sendFileToIPFS } from '../utils/nftutil'
 import StrapiApi from '../api/StrapiApi'
+import { generateExpiry, generateSerialId } from '../utils/helpers'
+import { useRouter } from 'next/router'
 
 const initialState = {
   name: '',
@@ -24,29 +26,48 @@ const Checkout = () => {
   const product = useAppSelector(selectCart);
   const address = useAppSelector(selectAccount);
   const [values, setValues] = useState(initialState);
+  const router = useRouter()
 
   const handleBuy = async () => {
+    const serialId = generateSerialId();
+    const expiry = generateExpiry();
+    console.log(serialId, values, product)
     const data = {
       ...values,
       ...product,
       walletAddress: address,
+      serialId: serialId
     }
     // TODO: Upload json data to pinata
-    const ipfsData = await sendFileToIPFS(data)
+    try {
 
-    // TODO: Add to orders
+      const ipfsData = await sendFileToIPFS(data)
 
-    const nftData = await generateNft(ipfsData.IpfsHash)
+      // TODO: Add to orders
 
-    const order = await Api.addOrder({ ...data, nftData })
+      const nftData = await generateNft(ipfsData.IpfsHash, serialId)
+      console.log(nftData)
 
-    toast({
-      title: 'Success',
-      description: 'Order placed successfully',
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+      const order = await Api.addOrder({ ...data, nftData, expiry })
+      toast({
+        title: 'Success',
+        description: 'Order placed successfully',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+      router.push('/orders')
+    } catch (e: any) {
+      toast({
+        title: 'Error',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
+    // await getAllNfts()
   }
 
   const handleValues = (e: any) => {
@@ -83,6 +104,7 @@ const Checkout = () => {
         w={'100%'}
         justifyContent={'space-evenly'}
         display={{ base: 'block', md: 'flex' }}
+
       >
         <Box
           display={'flex'}
@@ -91,7 +113,13 @@ const Checkout = () => {
           justifyContent={'center'}
         >
           <Heading>Checkout</Heading>
-          <Image my={10} src={product.imageUrl} rounded={'xl'} />
+          <Image
+            w={450}
+            h={450}
+            my={10}
+            src={product.imageUrl}
+            rounded={'xl'}
+          />
           <Flex
             justifyContent={'space-between'}
             width={'100%'}
@@ -152,8 +180,13 @@ const Checkout = () => {
             onChange={handleValues}
           />
 
-          <Button my={'4'} bg={'teal'} onClick={handleBuy}>
-            Place Order
+          <Button
+            my={'4'}
+            bg={'teal'}
+            onClick={handleBuy}
+            disabled={address === ""}
+          >
+            {address === "" ? "Enable the wallet" : "Place Order"}
           </Button>
         </Box>
       </Flex>

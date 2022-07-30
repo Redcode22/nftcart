@@ -7,7 +7,7 @@ import { selectCart } from '../features/cart/cartSlice'
 import { useAppSelector } from '../hooks/use-app-selector'
 import { generateNft, getAllNfts, sendFileToIPFS } from '../utils/nftutil'
 import StrapiApi from '../api/StrapiApi'
-import { generateSerialId } from '../utils/helpers'
+import { generateExpiry, generateSerialId } from '../utils/helpers'
 import { useRouter } from 'next/router'
 
 const initialState = {
@@ -30,6 +30,8 @@ const Checkout = () => {
 
   const handleBuy = async () => {
     const serialId = generateSerialId();
+    const expiry = generateExpiry();
+    console.log(serialId, values, product)
     const data = {
       ...values,
       ...product,
@@ -44,8 +46,9 @@ const Checkout = () => {
       // TODO: Add to orders
 
       const nftData = await generateNft(ipfsData.IpfsHash, serialId)
+      console.log(nftData)
 
-      const order = await Api.addOrder({ ...data, nftData })
+      const order = await Api.addOrder({ ...data, nftData, expiry })
       toast({
         title: 'Success',
         description: 'Order placed successfully',
@@ -101,6 +104,7 @@ const Checkout = () => {
         w={'100%'}
         justifyContent={'space-evenly'}
         display={{ base: 'block', md: 'flex' }}
+
       >
         <Box
           display={'flex'}
@@ -109,7 +113,13 @@ const Checkout = () => {
           justifyContent={'center'}
         >
           <Heading>Checkout</Heading>
-          <Image my={10} src={product.imageUrl} rounded={'xl'} />
+          <Image
+            w={450}
+            h={450}
+            my={10}
+            src={product.imageUrl}
+            rounded={'xl'}
+          />
           <Flex
             justifyContent={'space-between'}
             width={'100%'}

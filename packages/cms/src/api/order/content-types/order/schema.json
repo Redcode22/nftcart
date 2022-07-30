@@ -18,7 +18,7 @@
     "name": {
       "type": "string"
     },
-    "serialID": {
+    "serialId": {
       "type": "string"
     },
     "expiry": {

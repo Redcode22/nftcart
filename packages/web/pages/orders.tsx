@@ -47,6 +47,7 @@ const Orders = () => {
       <Navbar />
       <Box w={'90%'} flex={1}>
         {orders.map((order, index) => {
+          console.log(order)
           return (
             <OrderCard order={order} key={index} />
           )

@@ -52,3 +52,9 @@ export function formatAmountFromStripe(
 export function generateSerialId(): string {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
+
+export function generateExpiry(): string {
+  const date = new Date()
+  date.setFullYear(date.getFullYear() + 1)
+  return date.toISOString()
+}
